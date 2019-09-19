@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const exphbs  = require('express-handlebars');
 const plaid = require('plaid');
 
 const plaidClient = new plaid.Client(
@@ -12,7 +13,8 @@ const plaidClient = new plaid.Client(
 
 const app = express();
 
-app.set('view engine', 'ejs');
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 app.get('/link', (req, res) => {
   res.render('link', {

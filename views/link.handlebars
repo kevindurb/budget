@@ -6,7 +6,7 @@
     clientName: 'Budget',
     countryCodes: ['US'],
     env: 'development',
-    key: <%- JSON.stringify(PLAID_PUBLIC_KEY) %>,
+    key: '{{{ PLAID_PUBLIC_KEY }}}',
     product: ['transactions'],
     language: 'en',
     onLoad: function() {
@@ -51,5 +51,3 @@
     handler.open();
   });
 </script>
-
-
