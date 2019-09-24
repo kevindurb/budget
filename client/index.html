@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU="
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.2/auth0-spa-js.production.js"></script>
+    <script>
+      window.global = window;
+      global.process = {
+        env: {
+          NODE_ENV: 'development',
+          AUTH_DOMAIN: 'sinkfunds.auth0.com',
+          AUTH_CLIENT_ID: 'u1ypuBOAVh6JM0qUz882LBlrwgic7U4g',
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <main>
+    </main>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

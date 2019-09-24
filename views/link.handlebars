@@ -6,11 +6,11 @@
     clientName: 'Budget',
     countryCodes: ['US'],
     env: 'development',
-    key: '{{{ PLAID_PUBLIC_KEY }}}',
+    key: '{{{PLAID_PUBLIC_KEY}}}',
     product: ['transactions'],
     language: 'en',
     onLoad: function() {
-      // Optional, called when Link loads
+      // Optional, called whe
     },
     onSuccess: function(publicToken, metadata) {
       console.log(publicToken, metadata);
