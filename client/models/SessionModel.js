@@ -5,14 +5,15 @@ export class SessionModel extends Model {
   constructor() {
     super();
     this.authenticationService = new AuthenticationService();
-
-    this.checkRedirect();
   }
 
   async checkRedirect() {
-    await this.authenticationService.checkRedirect();
-
-    this.emit('SESSION_READY');
+    const query = window.location.search;
+    if (query.includes("code=") && query.includes("state=")) {
+      await this.authenticationService.handleRedirectCallback();
+      window.history.replaceState({}, document.title, "/");
+    }
+    this.emit('CHANGE');
   }
 
   isLoggedIn() {
@@ -20,6 +21,10 @@ export class SessionModel extends Model {
   }
 
   login() {
+    return this.authenticationService.login();
+  }
+
+  logout() {
     return this.authenticationService.login();
   }
 

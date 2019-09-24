@@ -1,13 +1,12 @@
 import { View } from '/View.js';
-import { div, button } from '/dom.js';
+import { build } from '/fluent.js';
 
 export class ProfilePreviewView extends View {
-  constructor(model, $el = null) {
-    super();
-    this.$el = $el || div();
-    this.model = model;
-
-    this.onLoginClick = this.onLoginClick.bind(this);
+  getEvents() {
+    return {
+      'click #login': 'onLoginClick',
+      'click #logout': 'onLogoutClick',
+    };
   }
 
   onLoginClick(event) {
@@ -15,18 +14,32 @@ export class ProfilePreviewView extends View {
     this.emit('LOGIN_CLICK');
   }
 
+  onLogoutClick(event) {
+    event.preventDefault();
+    this.emit('LOGOUT_CLICK');
+  }
+
   async renderProfile() {
-    console.log(await this.model.getUser());
+    const user = await this.model.getUser();
+
+    build(this.$el)
+    .clear()
+    .child(user.nickname)
+    .child(
+      build('button')
+      .text('LOGOUT')
+      .id('logout')
+    );
   }
 
   renderLoginLink() {
-    const $login = button();
-    $login.textContent = 'LOGIN';
-    this.listenTo($login, 'click', this.onLoginClick);
-
-    this.$el.innerHTML = '';
-
-    this.$el.appendChild($login);
+    build(this.$el)
+    .clear()
+    .child(
+      build('button')
+      .text('LOGIN')
+      .id('login')
+    );
   }
 
   async render() {

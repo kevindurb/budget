@@ -6,15 +6,17 @@ export class ProfilePreviewController extends Controller {
     this.model = model;
     this.view = view;
 
-    this.onLoginClick = this.onLoginClick.bind(this);
-    this.renderView = this.renderView.bind(this);
-
     this.listenTo(this.view, 'LOGIN_CLICK', this.onLoginClick);
-    this.listenTo(this.model, 'SESSION_READY', this.renderView);
+    this.listenTo(this.view, 'LOGOUT_CLICK', this.onLogoutClick);
+    this.listenTo(this.model, 'CHANGE', this.renderView);
   }
 
   onLoginClick() {
     this.model.login();
+  }
+
+  onLogoutClick() {
+    this.model.logout();
   }
 
   renderView() {

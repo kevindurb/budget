@@ -1,22 +1,5 @@
-import { $ } from '/dom.js';
-import { AppModel } from './models/AppModel.js';
-import { ProfilePreviewView } from './views/ProfilePreviewView.js';
-import { ProfilePreviewController } from './controllers/ProfilePreviewController.js';
+import { App } from '/App.js';
 
-// models
-const appModel = new AppModel();
+window.app = new App();
 
-// views
-const profilePreviewView = new ProfilePreviewView(
-  appModel.session,
-);
-
-// controllers
-const profilePreviewController = new ProfilePreviewController(
-  appModel.session,
-  profilePreviewView,
-);
-
-const $main = $('main');
-
-$main.appendChild(profilePreviewView.$el);
+window.app.boot();

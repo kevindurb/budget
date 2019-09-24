@@ -23,13 +23,16 @@ export class AuthenticationService {
     });
   }
 
-  async checkRedirect() {
+  async logout() {
     const client = await this.getClient();
-    const query = window.location.search;
-    if (query.includes("code=") && query.includes("state=")) {
-      await client.handleRedirectCallback();
-      window.history.replaceState({}, document.title, "/");
-    }
+    client.logout({
+      returnTo: window.location.origin
+    });
+  }
+
+  async handleRedirectCallback() {
+    const client = await this.getClient();
+    await client.handleRedirectCallback();
   }
 
   async getUser() {
